@@ -1,17 +1,14 @@
+import java.io.IOException;
 import java.sql.Array;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
         int i;
-
         for (i = 1; i <= 300; i++) {
-            boolean Fizz = false;
-            boolean Buzz = false;
-            boolean Bang = false;
-            boolean Bong = false;
-            boolean Fezz = false;
-            boolean reverse = false;
+            boolean Fizz, Buzz, Bang, Bong, Fezz, reverse;
+            Fizz = Buzz = Bang = Bong = Fezz = reverse = false;
 
             if (i % 3 == 0) {
                 Fizz = true;
@@ -28,35 +25,57 @@ public class Main {
             if (i % 13 == 0) {
                 Fezz = true;
             }
-            if (i % 17 == 0){
+            if (i % 17 == 0) {
                 reverse = true;
             }
-
             StringBuilder stringBuilder = new StringBuilder();
+            List<String> strings = new ArrayList<>();
             if (Fizz) {
-                stringBuilder.append("Fizz");
-            }
-            if (Buzz) {
-                stringBuilder.append("Buzz");
-            }
-            if (Bang) {
-                stringBuilder.append("Bang");
-            }
-            if (Bong) {
-                stringBuilder.replace(0, stringBuilder.length(), "Bong");
+                strings.add("Fizz");
             }
             if (Fezz) {
-                stringBuilder.insert(
-                        (stringBuilder.indexOf("B") == -1 ? 0 : stringBuilder.indexOf("B")),
-                        "Fezz"
-                );
+                strings.add("Fezz");
+            }
+            if (Buzz) {
+                strings.add("Buzz");
+            }
+            if (Bang) {
+                strings.add("Bang");
+            }
+            if (Bong) {
+                strings.clear();
+                strings.add("Bong");
             }
             if (reverse) {
-                String[] arr = stringBuilder.toString().split("(?<=\\G...)");
-                stringBuilder.replace(0,stringBuilder.length(), arr[]);
+                Collections.reverse(strings);
             }
-            System.out.println(stringBuilder);
-            System.out.println(i);
+
+            for (String str : strings) {
+                stringBuilder.append(str);
+            }
+            if (!strings.isEmpty()) {
+                System.out.println(stringBuilder.toString() + ": " + i);
+            } else {
+                System.out.println("This number is Dumb: " + i);
+            }
+        }
+    }
+}
+
+class CountToMax {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ok You want me to count upto a number." +
+                "What number do you want me to count to?");
+        try{
+            int i = scanner.nextInt();
+            System.out.println("Ok *breaths*");
+            for (int j=0;j<=i;j++) {
+                System.out.println(j);
+            }
+        } catch (InputMismatchException e){
+            System.out.println("Use some common sense. Enter a NUMBER");
         }
     }
 }
